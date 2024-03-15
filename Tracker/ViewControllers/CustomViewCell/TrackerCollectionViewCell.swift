@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class LetterCollectionViewCell: UICollectionViewCell {
+final class TrackerCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = "LetterCustomCollectionViewCell"
+    static let identifier = "TrackerCustomCollectionViewCell"
     
     let frameView = UIView()
     let titleLabel = UILabel()

@@ -70,7 +70,7 @@ final class TrackerViewController: UIViewController {
         let buttonIndexPath = sender.convert(CGPoint.zero, to: self.collectionView)
         
         guard let indexPath = collectionView.indexPathForItem(at: buttonIndexPath),
-              let cell = collectionView.cellForItem(at: indexPath) as? LetterCollectionViewCell else { return }
+              let cell = collectionView.cellForItem(at: indexPath) as? TrackerCollectionViewCell else { return }
         
         let category = newData[indexPath.section]
                 
@@ -127,7 +127,7 @@ final class TrackerViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        collectionView.register(LetterCollectionViewCell.self, forCellWithReuseIdentifier: LetterCollectionViewCell.identifier)
+        collectionView.register(TrackerCollectionViewCell.self, forCellWithReuseIdentifier: TrackerCollectionViewCell.identifier)
         
         collectionView.register(SuplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
         collectionView.register(SuplementaryView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
@@ -207,7 +207,7 @@ extension TrackerViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LetterCollectionViewCell.identifier, for: indexPath) as? LetterCollectionViewCell else { print("We have some problems with CustomCell");
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrackerCollectionViewCell.identifier, for: indexPath) as? TrackerCollectionViewCell else { print("We have some problems with CustomCell");
             return UICollectionViewCell()
         }
         
@@ -216,7 +216,7 @@ extension TrackerViewController: UICollectionViewDataSource, UICollectionViewDel
         return cell
     }
     
-    private func configureCell(cell: LetterCollectionViewCell, indexPath: IndexPath) {
+    private func configureCell(cell: TrackerCollectionViewCell, indexPath: IndexPath) {
         let category = newData[indexPath.section]
                 
         let tracker = category.trackers[indexPath.row]
@@ -229,7 +229,7 @@ extension TrackerViewController: UICollectionViewDataSource, UICollectionViewDel
         cell.plusButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
     }
         
-    private func makeTaskDone(trackForAdd: TrackerRecord, cellColor: UIColor, cell: LetterCollectionViewCell) {
+    private func makeTaskDone(trackForAdd: TrackerRecord, cellColor: UIColor, cell: TrackerCollectionViewCell) {
         completedTrackers?.append(trackForAdd)
         let config = UIImage.SymbolConfiguration(pointSize: 34)
         let doneImage = UIImage(systemName: "checkmark.circle.fill", withConfiguration: config)?.withTintColor(cellColor, renderingMode: .alwaysOriginal)
@@ -238,7 +238,7 @@ extension TrackerViewController: UICollectionViewDataSource, UICollectionViewDel
         cell.daysLabel.text = "\(cell.days) день"
     }
     
-    private func makeTaskUndone(trackForAdd: TrackerRecord, cellColor: UIColor, cell: LetterCollectionViewCell) {
+    private func makeTaskUndone(trackForAdd: TrackerRecord, cellColor: UIColor, cell: TrackerCollectionViewCell) {
         let plusButtonImage = UIImage(named: "plusButton")?.withTintColor(cellColor)
         cell.plusButton.setImage(plusButtonImage, for: .normal)
         cell.days -= 1
@@ -266,12 +266,12 @@ extension TrackerViewController: UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as? LetterCollectionViewCell
+        let cell = collectionView.cellForItem(at: indexPath) as? TrackerCollectionViewCell
         cell?.titleLabel.font = .systemFont(ofSize: 17, weight: .bold)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as? LetterCollectionViewCell
+        let cell = collectionView.cellForItem(at: indexPath) as? TrackerCollectionViewCell
         cell?.titleLabel.font = .systemFont(ofSize: 17, weight: .regular)
     }
 }

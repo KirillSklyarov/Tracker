@@ -5,7 +5,6 @@
 //  Created by Kirill Sklyarov on 13.03.2024.
 //
 
-import Foundation
 import UIKit
 
 struct Tracker {
